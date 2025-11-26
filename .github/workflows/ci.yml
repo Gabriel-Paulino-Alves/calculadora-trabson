@@ -22,9 +22,15 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run tests with coverage
-        run: npm test
+      # 🌟 RODA SÓ OS UNIT TESTS COM COBERTURA
+      - name: Run unit tests with coverage
+        run: npm run test:unit -- --coverage
 
+      # 🌟 RODA OS TESTES DE INTEGRAÇÃO SEM COBERTURA
+      - name: Run integration tests
+        run: npm run test:integration
+
+      # 🌟 ENVIA SOMENTE A COBERTURA DOS UNIT TESTS
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
