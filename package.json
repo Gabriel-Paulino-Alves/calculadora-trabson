@@ -1,0 +1,23 @@
+{
+  "name": "calculadora-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "http-server public -p 8080",
+    "test:unit": "jest --config=jest.unit.config.js --coverage",
+    "test:integration": "jest --config=jest.integration.config.js --coverage",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:e2e": "cypress run",
+    "test:e2e:ci": "start-server-and-test start http://localhost:8080 test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@testing-library/dom": "7.31.2",
+    "@testing-library/jest-dom": "5.11.10",
+    "cypress": "^9.7.0",
+    "http-server": "^0.12.3",
+    "jest": "26.6.3",
+    "jsdom": "16.7.0",
+    "start-server-and-test": "^2.1.3"
+  }
+}

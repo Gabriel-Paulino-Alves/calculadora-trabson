@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora Simples</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="card">
+    <h2>Calculadora</h2>
+
+    <input id="a" type="text" placeholder="Valor A" />
+    <input id="b" type="text" placeholder="Valor B" />
+
+    <div class="row">
+      <button id="add">+</button>
+      <button id="sub" class="secondary">-</button>
+      <button id="mul" class="secondary">×</button>
+      <button id="div" class="secondary">÷</button>
+    </div>
+
+    <div class="row">
+      <button id="pow">xʸ</button>
+      <button id="clear" class="secondary">Limpar</button>
+    </div>
+
+    <div id="result">Resultado: —</div>
+
+    <script type="module" src="script.js"></script>
+  </div>
+</body>
+</html>
