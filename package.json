@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "http-server public -p 8080",
-    "test:unit": "jest --config=jest.unit.config.js --coverage",
+    "test:unit": "jest --coverage --coverageDirectory=coverage/unit",
     "test:integration": "jest --config=jest.integration.config.js",
     "test": "npm run test:unit && npm run test:integration",
     "test:e2e": "cypress run",
