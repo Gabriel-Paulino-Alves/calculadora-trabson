@@ -5,5 +5,5 @@ module.exports = {
   
   // DESATIVAR cobertura nos testes de integração
   collectCoverage: false,
-  collectCoverageFrom: []
+  collectCoverageFrom: ["src/**/*.js", "!src/ui.js", "!src/main.js"]
 };
