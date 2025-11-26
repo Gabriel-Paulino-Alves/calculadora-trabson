@@ -11,13 +11,16 @@
     "test:e2e:ci": "start-server-and-test start http://localhost:8080 test:e2e"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.14.7",
     "@playwright/test": "^1.57.0",
     "@testing-library/dom": "7.31.2",
     "@testing-library/jest-dom": "5.11.10",
     "cypress": "^9.7.0",
     "http-server": "^0.12.3",
+    "istanbul-lib-coverage": "^3.2.2",
     "jest": "26.6.3",
     "jsdom": "16.7.0",
+    "serve": "^11.3.2",
     "start-server-and-test": "^2.1.3"
   }
 }
