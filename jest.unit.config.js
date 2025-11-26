@@ -2,11 +2,14 @@ module.exports = {
   testMatch: ["**/tests/unit/**/*.test.js"],
   testEnvironment: "node",
   transform: {},
-  
-  // GERAR cobertura somente nos unitários
+
+  // Gerar cobertura somente dos testes unitários
   collectCoverage: true,
   collectCoverageFrom: ["src/**/*.js"],
 
-  // Se quiser excluir algo, pode:
-  // collectCoverageFrom: ["src/**/*.js", "!src/main.js", "!src/ui.js"]
+  // DIRETÓRIO DEDICADO ao coverage dos unit tests
+  coverageDirectory: "coverage/unit",
+
+  // Garantir que o Codecov receba um lcov.info 100% válido
+  coverageReporters: ["lcov", "text"]
 };
