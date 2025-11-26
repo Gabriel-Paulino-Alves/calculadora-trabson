@@ -1,6 +1,4 @@
-/**
- * @jest-environment jsdom
- */
+/** @jest-environment jsdom */
 
 require('@testing-library/jest-dom/extend-expect');
 const { getByText } = require('@testing-library/dom');
@@ -17,14 +15,17 @@ describe('UI integration', () => {
   beforeEach(() => {
     document.documentElement.innerHTML = html;
 
-    const { add } = require('../../src/calculator.js');
+    // Importa o módulo como CommonJS
+    const calculator = require('../../src/calculator.js');
 
+    // Coloca valores nos inputs
     document.querySelector('#a').value = '2';
     document.querySelector('#b').value = '3';
 
+    // Atribui comportamento aos botões
     document.querySelector('#add').addEventListener('click', () => {
       document.querySelector('#result').textContent =
-        `Resultado: ${add(2, 3)}`;
+        `Resultado: ${calculator.add(2, 3)}`;
     });
   });
 
@@ -34,5 +35,4 @@ describe('UI integration', () => {
     expect(document.querySelector('#result'))
       .toHaveTextContent('Resultado: 5');
   });
-
 });
