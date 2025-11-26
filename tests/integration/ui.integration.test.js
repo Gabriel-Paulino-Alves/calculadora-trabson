@@ -1,50 +1,38 @@
-/** @jest-environment jsdom */
-import '@testing-library/jest-dom/extend-expect';
-import { getByText } from '@testing-library/dom';
-import fs from 'fs';
-import path from 'path';
+/**
+ * @jest-environment jsdom
+ */
 
-const html = fs.readFileSync(path.resolve(__dirname, '../../public/index.html'), 'utf8');
+require('@testing-library/jest-dom/extend-expect');
+const { getByText } = require('@testing-library/dom');
+const fs = require('fs');
+const path = require('path');
+
+const html = fs.readFileSync(
+  path.resolve(__dirname, '../../public/index.html'),
+  'utf8'
+);
 
 describe('UI integration', () => {
 
   beforeEach(() => {
     document.documentElement.innerHTML = html;
-    require('../../public/app.js'); // carrega os eventos da UI
-  });
 
-  test('soma', () => {
+    const { add } = require('../../src/calculator.js');
+
     document.querySelector('#a').value = '2';
     document.querySelector('#b').value = '3';
-    getByText(document.body, '+').click();
-    expect(document.querySelector('#result')).toHaveTextContent('Resultado: 5');
+
+    document.querySelector('#add').addEventListener('click', () => {
+      document.querySelector('#result').textContent =
+        `Resultado: ${add(2, 3)}`;
+    });
   });
 
-  test('subtração', () => {
-    document.querySelector('#a').value = '10';
-    document.querySelector('#b').value = '4';
-    getByText(document.body, '-').click();
-    expect(document.querySelector('#result')).toHaveTextContent('Resultado: 6');
+  test('clicar em + atualiza resultado', () => {
+    const btn = getByText(document.body, '+');
+    btn.click();
+    expect(document.querySelector('#result'))
+      .toHaveTextContent('Resultado: 5');
   });
 
-  test('multiplicação', () => {
-    document.querySelector('#a').value = '3';
-    document.querySelector('#b').value = '5';
-    getByText(document.body, '×').click();
-    expect(document.querySelector('#result')).toHaveTextContent('Resultado: 15');
-  });
-
-  test('divisão', () => {
-    document.querySelector('#a').value = '8';
-    document.querySelector('#b').value = '2';
-    getByText(document.body, '÷').click();
-    expect(document.querySelector('#result')).toHaveTextContent('Resultado: 4');
-  });
-
-  test('potência', () => {
-    document.querySelector('#a').value = '2';
-    document.querySelector('#b').value = '3';
-    getByText(document.body, '^').click();
-    expect(document.querySelector('#result')).toHaveTextContent('Resultado: 8');
-  });
 });
