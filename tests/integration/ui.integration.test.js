@@ -15,7 +15,7 @@ describe('UI integration', () => {
   beforeEach(() => {
     document.documentElement.innerHTML = html;
 
-    // Importa o módulo como CommonJS
+    // Importa o módulo como CommonJ
     const calculator = require('../../src/calculator.js');
 
     // Coloca valores nos inputs
