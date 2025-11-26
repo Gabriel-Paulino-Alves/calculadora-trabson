@@ -2,5 +2,8 @@ module.exports = {
   testMatch: ["**/tests/integration/**/*.test.js"],
   testEnvironment: "jsdom",
   transform: {},
-  collectCoverageFrom: ["src/**/*.js"]
+  
+  // DESATIVAR cobertura nos testes de integração
+  collectCoverage: false,
+  collectCoverageFrom: []
 };
