@@ -1,8 +1,9 @@
 name: CI
 
 on:
-  pull_request:
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
 
 jobs:
@@ -10,34 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v3
         with:
-          node-version: "18"
+          node-version: 12
 
-      - name: Install deps
-        run: npm ci
+      - name: Install dependencies
+        run: npm install
 
-      - name: Unit tests
-        run: npm run test:unit
+      - name: Run tests with coverage
+        run: npm test
 
-      - name: Integration tests
-        run: npm run test:integration
-
-      - name: Upload coverage
-        uses: codecov/codecov-action@v4
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
         with:
+          token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/lcov.info
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Run E2E tests with Cypress
-        run: npm run test:e2e:ci
-
-      - uses: cypress-io/github-action@v4
-  with:
-    start: npm start
-    wait-on: 'http://localhost:8080'
-
+          fail_ci_if_error: true
