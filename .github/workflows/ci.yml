@@ -22,9 +22,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-
+      - name: Run E2E tests
+        run: npm run test:e2e
       
-
       # 🌟 RODA SÓ OS UNIT TESTS COM COBERTURA
       - name: Run unit tests with coverage
         run: npm run test:unit -- --coverage
@@ -38,5 +38,5 @@ jobs:
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          files: ./coverage/**/lcov.info
+          files: ./coverage/unit/lcov.info
           fail_ci_if_error: true
