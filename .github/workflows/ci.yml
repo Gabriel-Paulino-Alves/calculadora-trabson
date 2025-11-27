@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install wait-on@5  # garante compatibilidade com Node 12
+          npm install wait-on@5 
 
       # 🌟 Unit tests com cobertura
       - name: Run unit tests with coverage
@@ -42,4 +42,4 @@ jobs:
 
       # 🌟 E2E tests (Cypress) usando start-server-and-test
       - name: Run E2E tests
-        run: npx start-server-and-test "npm run start" http://localhost:8080 "npm run test:e2e"
+        run: npx start-server-and-test "npm run start" http://127.0.0.1:8080 "npm run test:e2e"
