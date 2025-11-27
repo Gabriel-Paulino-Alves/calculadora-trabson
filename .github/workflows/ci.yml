@@ -23,7 +23,7 @@ jobs:
         run: npm install
 
       - name: Run E2E tests
-        run: npm run test:e2
+        run: npm run test:e2e
       
       # 🌟 RODA SÓ OS UNIT TESTS COM COBERTURA
       - name: Run unit tests with coverage
