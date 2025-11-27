@@ -18,36 +18,28 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 12
+
       - name: Install dependencies
         run: |
           npm install
-          npm install wait-on@5  # versão compatível com Node 12
+          npm install wait-on@5  # garante compatibilidade com Node 12
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Start server in background
-        run: npm start &
-
-      - name: Wait for server to be ready
-        run: npx wait-on http://localhost:8080
-
-
-      - name: Run E2E tests
-        run: npm run test:e2e
-      
-      # 🌟 RODA SÓ OS UNIT TESTS COM COBERTURA
+      # 🌟 Unit tests com cobertura
       - name: Run unit tests with coverage
-        run: npm run test:unit -- --coverage
+        run: npm run test:unit -- --testPathIgnorePatterns=/tests/e2e/|/cypress/
 
-      # 🌟 RODA OS TESTES DE INTEGRAÇÃO SEM COBERTURA
-      - name: Run integration tests
-        run: npm run test:integration -- --coverage
-
-      # 🌟 ENVIA SOMENTE A COBERTURA DOS UNIT TESTS
+      # 🌟 Upload cobertura unit tests
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./coverage/unit/lcov.info
           fail_ci_if_error: true
+
+      # 🌟 Integration tests sem cobertura
+      - name: Run integration tests
+        run: npm run test:integration -- --testPathIgnorePatterns=/tests/e2e/|/cypress/
+
+      # 🌟 E2E tests (Cypress) usando start-server-and-test
+      - name: Run E2E tests
+        run: npx start-server-and-test start http://localhost:8080 test:e2e
