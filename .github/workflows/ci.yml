@@ -42,4 +42,4 @@ jobs:
 
       # 🌟 E2E tests (Cypress) usando start-server-and-test
       - name: Run E2E tests
-        run: npx start-server-and-test start http://localhost:8080 test:e2e --timeout 20000
+        run: npx start-server-and-test "npm run start" http://localhost:8080 "npm run test:e2e"
